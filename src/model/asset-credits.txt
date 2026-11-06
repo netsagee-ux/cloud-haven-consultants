@@ -1,0 +1,3 @@
+The engraved globe map uses public-domain 1:110 million Natural Earth land and country boundaries, distributed in world-atlas 2.0.2.
+The reflection image is derived from the courtyard studio light included with Blender. Greg Zaal (Poly Haven) created the original panorama and released it under CC0. The JPEG version applies neutral tone mapping for portable browser rendering.
+The mechanical geometry, materials, cartographic styling and product render were built for Cloud Haven Consultants.

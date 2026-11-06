@@ -1,0 +1,380 @@
+{
+  "/seo-agency-pakistan/": {
+    "faq": [
+      {
+        "q": "How is my monthly fee set?",
+        "a": "A review of your site, competitors and goals informs a fixed written quote. The appropriate plan depends on the work your market needs."
+      },
+      {
+        "q": "Which language should our pages use?",
+        "a": "We look at how your customers search, then plan English, Urdu or Roman Urdu content to suit those searches."
+      },
+      {
+        "q": "What access helps you get started?",
+        "a": "Website access and existing Search Console and Analytics accounts are useful. We can help set up measurement when those accounts are missing."
+      }
+    ],
+    "deliverables": [
+      "Essentials — keyword planning, on-page work for up to ten priority pages and technical checks.",
+      "Growth — four new pages or guides per month, coverage for up to three cities and digital PR.",
+      "Custom — a scoped plan for e-commerce, larger sites or multiple brands, with a named contact."
+    ]
+  },
+  "/seo-audit-services/": {
+    "faq": [
+      {
+        "q": "How much time should we allow?",
+        "a": "A typical review takes one to two weeks. A larger site may need longer, so we confirm timing when we agree the scope."
+      },
+      {
+        "q": "What access does the audit require?",
+        "a": "Read access to Analytics and Search Console usually covers the data review. Hosting credentials are unnecessary for the audit."
+      },
+      {
+        "q": "Can our own developers carry out the work?",
+        "a": "Yes. The recommendations are designed for handover, and implementation support can be scoped separately."
+      }
+    ],
+    "deliverables": [
+      "Technical, content and link findings backed by examples.",
+      "A comparison with competing sites and an ordered list of fixes.",
+      "Written report and a call or recorded walkthrough."
+    ]
+  },
+  "/technical-seo-services/": {
+    "faq": [
+      {
+        "q": "Which platforms do you support?",
+        "a": "The team works on WordPress, Shopify and custom sites. Platform-specific checks can include theme performance, plugins and caching."
+      },
+      {
+        "q": "Can our developer implement the fixes?",
+        "a": "Yes. We can write the tickets, discuss the changes and test the result after deployment."
+      },
+      {
+        "q": "Can the scope cover multilingual websites?",
+        "a": "Yes. International projects can include language targeting and hreflang review when that is relevant to the site."
+      }
+    ],
+    "deliverables": [
+      "Crawl findings and development tickets ordered by impact.",
+      "Redirect mapping and pre-launch checks for a migration.",
+      "A verification crawl, with post-launch monitoring for migrations."
+    ]
+  },
+  "/local-seo-services/": {
+    "faq": [
+      {
+        "q": "How do you handle several locations?",
+        "a": "Each branch is reviewed separately, including its business profile, directory records and local page. A combined report lets you compare locations."
+      },
+      {
+        "q": "How do you quote the work?",
+        "a": "The team discusses branch count and scope on a discovery call before proposing a fixed monthly fee."
+      },
+      {
+        "q": "Can we begin without a website?",
+        "a": "We can start by planning a basic local page that gives people a destination from your business profile."
+      }
+    ],
+    "deliverables": [
+      "Business Profile and listings review for each agreed branch.",
+      "Local page plan and a process for requesting genuine customer reviews.",
+      "A shared report covering local calls, directions and map visibility."
+    ]
+  },
+  "/content-marketing-services/": {
+    "faq": [
+      {
+        "q": "Who owns the completed work?",
+        "a": "Your company owns the paid-for articles and associated files."
+      },
+      {
+        "q": "How do you handle specialist topics?",
+        "a": "A writer interviews your subject expert and asks them to review the draft. Editorial review and fact-checking are part of the process."
+      },
+      {
+        "q": "Are Urdu and Roman Urdu available?",
+        "a": "English is the main publishing language. Urdu or Roman Urdu pieces can be discussed for the specific audience and brief."
+      }
+    ],
+    "deliverables": [
+      "Topic plan and approved briefs aligned with your services.",
+      "Edited articles or landing pages with specialist review where needed.",
+      "Refresh and distribution plan for existing material."
+    ]
+  },
+  "/social-media-marketing-agency-pakistan/": {
+    "faq": [
+      {
+        "q": "Do we keep our profiles and advertising accounts?",
+        "a": "Yes. Your team owns them and grants the working permissions needed to manage the agreed channels."
+      },
+      {
+        "q": "How are advertising costs paid?",
+        "a": "You pay the advertising platform directly. The management fee covers the agreed planning, creative and campaign work."
+      },
+      {
+        "q": "Can we use English and Roman Urdu together?",
+        "a": "Yes. Publishing language follows your brand and the way customers use the channel."
+      }
+    ],
+    "deliverables": [
+      "Monthly content calendar submitted for approval.",
+      "Channel-specific copy, visuals and short video as scoped.",
+      "Campaign report showing leads, costs and the next tests."
+    ]
+  },
+  "/digital-marketing-agency-pakistan/": {
+    "faq": [
+      {
+        "q": "How long is the initial engagement?",
+        "a": "The stated starting term is three months for setup and testing. It then continues monthly."
+      },
+      {
+        "q": "Can our internal marketing lead stay involved?",
+        "a": "Yes. Scope the tasks retained in-house and the specialist tasks assigned to Cloud Haven, with a shared performance report."
+      },
+      {
+        "q": "Who owns the campaign assets?",
+        "a": "The client retains the accounts and content. The team works with delegated access, and platform spend is billed separately from the agency fee."
+      }
+    ],
+    "deliverables": [
+      "Launch — basic SEO, two social channels, two content pieces a month and a quarterly review call.",
+      "Grow — full SEO, three social channels, one ad platform, four monthly content pieces, email and a quarterly landing page.",
+      "Scale — multi-market SEO, Google and Meta campaign management, tailored content and fortnightly review calls."
+    ]
+  },
+  "/medical-billing-services-pakistan/": {
+    "faq": [
+      {
+        "q": "Is the service intended for Pakistani or US providers?",
+        "a": "The main client group is US practices. A Pakistani provider can enquire and the team will assess whether the service fits its needs."
+      },
+      {
+        "q": "How are the fees structured?",
+        "a": "A per-claim arrangement or a percentage of collections may suit the work. Claim volume and payer mix inform the written proposal."
+      },
+      {
+        "q": "How does a new engagement begin?",
+        "a": "The team favours a short pilot so both sides can evaluate the workflow before confirming a wider agreement."
+      }
+    ],
+    "deliverables": [
+      "Sample billing and receivables review to agree the starting point.",
+      "Pilot workflow inside your billing system where compatible.",
+      "Monthly collections, denial and receivables report with action items."
+    ]
+  },
+  "/medical-billing-services-usa/": {
+    "faq": [
+      {
+        "q": "Will we need to change billing systems?",
+        "a": "Where compatible, the billing team works through access your practice grants in its existing system. The fit is discussed at discovery."
+      },
+      {
+        "q": "When are review calls scheduled?",
+        "a": "Coverage and calls are agreed around the practice’s hours. The team documents the schedule before launch."
+      },
+      {
+        "q": "What should we review before sharing patient data?",
+        "a": "Discuss access controls, current security documentation and business associate agreement arrangements directly with the team during scoping."
+      }
+    ],
+    "deliverables": [
+      "Discovery around specialty, payers, systems and working hours.",
+      "An agreed workflow and a limited batch of claims for the pilot.",
+      "Monthly review call and written action list for the practice."
+    ]
+  },
+  "/revenue-cycle-management-services/": {
+    "faq": [
+      {
+        "q": "Can we outsource one stage first?",
+        "a": "Yes. Some practices start with claims or accounts receivable and add denial management or front-desk checks later."
+      },
+      {
+        "q": "Which indicators will we see?",
+        "a": "Typical measures include days in receivables, clean-claim and denial rates, and collection trends. The practice and team agree on the final set."
+      },
+      {
+        "q": "How does revenue cycle work extend beyond billing?",
+        "a": "It can cover eligibility and registration before a claim, then reconciliation, follow-up and management reporting afterwards."
+      }
+    ],
+    "deliverables": [
+      "Baseline review and a written allocation of responsibilities.",
+      "Open balances and denials worklists for agreed stages.",
+      "Performance report using the measures agreed before launch."
+    ]
+  },
+  "/revenue-cycle-management-outsourcing/": {
+    "faq": [
+      {
+        "q": "Can we keep patient contact in-house?",
+        "a": "Yes. In a hybrid model the practice can retain front-desk and patient-facing work while the partner handles agreed back-office queues."
+      },
+      {
+        "q": "How do we decide whether to expand a pilot?",
+        "a": "Compare its performance against the starting measures and agree what needs to change before adding more stages."
+      },
+      {
+        "q": "What happens if we end the arrangement?",
+        "a": "Notice and data-return terms are discussed before signature, so both sides know how to hand the work back."
+      }
+    ],
+    "deliverables": [
+      "A written split of duties between practice and partner.",
+      "A limited pilot with turnaround measures and a baseline.",
+      "A handover plan covering ongoing access, notice and data return."
+    ]
+  },
+  "/denial-management-services/": {
+    "faq": [
+      {
+        "q": "Can you take over older denied claims?",
+        "a": "The first review checks each claim’s age against the relevant payer deadline. That determines which responses remain available."
+      },
+      {
+        "q": "What happens when clinical judgement is needed?",
+        "a": "We prepare the paperwork. The provider reviews the clinical argument, particularly for medical necessity appeals."
+      },
+      {
+        "q": "How can we see which items are open?",
+        "a": "A shared status log records each denial, and monthly reporting summarises open appeals, trends and recoveries."
+      }
+    ],
+    "deliverables": [
+      "Prioritised denial log with an owner and appeal deadline.",
+      "Corrected claims or appeal drafts with supporting records.",
+      "Recurring-cause analysis and specific feedback for practice teams."
+    ]
+  },
+  "/prior-authorization-services/": {
+    "faq": [
+      {
+        "q": "Who decides whether treatment is clinically appropriate?",
+        "a": "Your provider makes the clinical decision. Our role is to check payer requirements, prepare paperwork and track the request."
+      },
+      {
+        "q": "What happens after an unfavourable decision?",
+        "a": "We record the payer’s reason and prepare the appropriate correction or appeal for the provider to review."
+      },
+      {
+        "q": "Which insurers can be included?",
+        "a": "During onboarding the practice and team confirm which payers it bills and which approval workflows are in scope."
+      }
+    ],
+    "deliverables": [
+      "Requirements and evidence checklist by payer and service.",
+      "Submission references and a shared authorisation status log.",
+      "Expiry reminders, renewal tracking and turnaround reporting."
+    ]
+  },
+  "/provider-credentialing-services/": {
+    "faq": [
+      {
+        "q": "How long does payer enrolment take?",
+        "a": "It varies by payer and file. Several weeks to a few months is common, and the payer controls the final decision."
+      },
+      {
+        "q": "Can a group practice use one tracker?",
+        "a": "Yes. Tasks are organised by provider and payer and brought together in a shared tracker."
+      },
+      {
+        "q": "What is the CAQH profile used for?",
+        "a": "Many payers use it to review provider information. Maintenance includes checking details, updating documents and tracking re-attestation dates."
+      }
+    ],
+    "deliverables": [
+      "Provider document checklist and application package.",
+      "A shared status tracker for providers, locations and payers.",
+      "CAQH maintenance, re-attestation reminders and renewal calendar."
+    ]
+  },
+  "/business-consultancy-pakistan/": {
+    "faq": [
+      {
+        "q": "Can you help carry out the plan?",
+        "a": "Yes. Implementation support can follow the assessment so the people doing the work have help with processes, tools and training."
+      },
+      {
+        "q": "Can a founder based abroad use the service?",
+        "a": "Yes. Meetings and progress reviews can happen remotely. Legal filings, tax or audit work are coordinated with the appropriate licensed professionals."
+      },
+      {
+        "q": "How is a project priced?",
+        "a": "After the free initial conversation, you receive the proposed scope and fee in writing."
+      }
+    ],
+    "deliverables": [
+      "Diagnostic project — a two-to-four-week review ending with written findings and an owned action plan.",
+      "Monthly advisory — scheduled planning sessions, KPI reviews and support between meetings.",
+      "Implementation support — process or tool setup, staff training and handover documents."
+    ]
+  },
+  "/startup-consultant-pakistan/": {
+    "faq": [
+      {
+        "q": "Do you take shares for the work?",
+        "a": "The advisory engagement is fee-based. The founder retains their equity."
+      },
+      {
+        "q": "What help is available before a fundraising conversation?",
+        "a": "The team can prepare a pitch deck and financial model and help rehearse investor questions. Funding and introductions depend on others."
+      },
+      {
+        "q": "Who completes legal and tax filings?",
+        "a": "The team helps plan registration and coordinates with licensed professionals who handle the formal filings. You retain ownership of the accounts."
+      }
+    ],
+    "deliverables": [
+      "Validation findings, pricing assumptions and a decision on the next test.",
+      "Business plan, budget, financial model or pitch materials as scoped.",
+      "An example 90-day launch roadmap tailored to the venture."
+    ]
+  },
+  "/management-consulting-services/": {
+    "faq": [
+      {
+        "q": "Which size of company usually seeks this support?",
+        "a": "The firm describes its typical engagement as a company of roughly 15 to 300 people. A smaller team can discuss a lighter assessment."
+      },
+      {
+        "q": "Will we need a new reporting platform?",
+        "a": "The starting point is often an existing tool such as Excel, Google Sheets or Looker Studio. Tool selection follows the reporting need."
+      },
+      {
+        "q": "How will we know whether the changes help?",
+        "a": "Before work starts, we agree measures such as decision time, how often issues reach the owner and whether monthly reports arrive on schedule."
+      }
+    ],
+    "deliverables": [
+      "Role definitions and a map of decision responsibilities.",
+      "KPI dashboard or management report using existing tools where practical.",
+      "A meeting schedule and review process agreed with leadership."
+    ]
+  },
+  "/process-improvement-consulting/": {
+    "faq": [
+      {
+        "q": "How long is a single workflow project?",
+        "a": "Four to eight weeks is typical. Larger programmes can be divided into separately reviewed phases."
+      },
+      {
+        "q": "Which measures suit a pilot?",
+        "a": "Choose two or three before making a change. Turnaround time, repeat errors and staff hours are examples that can be checked again afterwards."
+      },
+      {
+        "q": "Can we use the software we already have?",
+        "a": "Yes. The team starts with existing tools and considers an additional system only where the expected benefit justifies it."
+      }
+    ],
+    "deliverables": [
+      "A map of a real workflow, including delay and rework.",
+      "A tested change, written procedure and handover to staff.",
+      "A review of agreed measures after 30 and 90 days."
+    ]
+  }
+}

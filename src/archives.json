@@ -1,0 +1,161 @@
+{
+  "posts": [
+    {
+      "path": "/20-business-blogs-that-will-blow-your-mind/",
+      "title": "20 Business Blogs That Will Blow Your Mind",
+      "categories": [
+        "/category/business/",
+        "/category/marketing/"
+      ]
+    },
+    {
+      "path": "/5-stages-of-team-development-what-you-need-to-know/",
+      "title": "5 Stages of Team Development: What You Need to Know",
+      "categories": [
+        "/category/design/",
+        "/category/freelance/"
+      ]
+    },
+    {
+      "path": "/be-remarkable-how-to-make-your-business-stand-out/",
+      "title": "Be Remarkable: How to Make Your Business Stand Out",
+      "categories": [
+        "/category/business/",
+        "/category/saas/"
+      ]
+    },
+    {
+      "path": "/hello-world/",
+      "title": "Hello world!",
+      "categories": [
+        "/category/uncategorized/"
+      ]
+    },
+    {
+      "path": "/the-8-step-process-we-used-to-start-a-successful-podcast/",
+      "title": "The 8-Step Process We Used to Start a Successful Podcast",
+      "categories": [
+        "/category/business/"
+      ]
+    },
+    {
+      "path": "/the-best-saas-tools-to-boost-business-growth/",
+      "title": "The Best SaaS Tools to Boost Business Growth",
+      "categories": [
+        "/category/design/",
+        "/category/saas/"
+      ]
+    },
+    {
+      "path": "/tools-and-tips-to-successfully-organize-your-small-business/",
+      "title": "Tools and Tips to Successfully Organize Your Small Business",
+      "categories": [
+        "/category/design/",
+        "/category/marketing/",
+        "/category/saas/"
+      ]
+    },
+    {
+      "path": "/want-to-grow-your-business-you-need-a-growth-strategy/",
+      "title": "Want to Grow Your Business? You Need a Growth Strategy",
+      "categories": [
+        "/category/freelance/",
+        "/category/marketing/"
+      ]
+    },
+    {
+      "path": "/what-effect-will-ai-have-on-construction/",
+      "title": "What Effect Will AI Have on Construction?",
+      "categories": [
+        "/category/design/"
+      ]
+    },
+    {
+      "path": "/why-startups-fail-11-mistakes-founders-keep-making/",
+      "title": "Why Startups Fail: 11 Mistakes Founders Keep Making",
+      "categories": [
+        "/category/saas/"
+      ]
+    },
+    {
+      "path": "/writing-a-business-case-what-it-is-and-how-to-write/",
+      "title": "Writing a Business Case: What It Is and How to Write",
+      "categories": [
+        "/category/marketing/",
+        "/category/saas/"
+      ]
+    }
+  ],
+  "archives": {
+    "/category/business/": {
+      "status": "200",
+      "posts": [
+        "/the-8-step-process-we-used-to-start-a-successful-podcast/",
+        "/be-remarkable-how-to-make-your-business-stand-out/",
+        "/20-business-blogs-that-will-blow-your-mind/"
+      ]
+    },
+    "/category/design/": {
+      "status": "200",
+      "posts": [
+        "/what-effect-will-ai-have-on-construction/",
+        "/the-best-saas-tools-to-boost-business-growth/",
+        "/tools-and-tips-to-successfully-organize-your-small-business/",
+        "/5-stages-of-team-development-what-you-need-to-know/"
+      ]
+    },
+    "/category/freelance/": {
+      "status": "200",
+      "posts": [
+        "/want-to-grow-your-business-you-need-a-growth-strategy/",
+        "/5-stages-of-team-development-what-you-need-to-know/"
+      ]
+    },
+    "/category/marketing/": {
+      "status": "200",
+      "posts": [
+        "/20-business-blogs-that-will-blow-your-mind/",
+        "/want-to-grow-your-business-you-need-a-growth-strategy/",
+        "/tools-and-tips-to-successfully-organize-your-small-business/",
+        "/writing-a-business-case-what-it-is-and-how-to-write/"
+      ]
+    },
+    "/category/saas/": {
+      "status": "200",
+      "posts": [
+        "/why-startups-fail-11-mistakes-founders-keep-making/",
+        "/be-remarkable-how-to-make-your-business-stand-out/",
+        "/the-best-saas-tools-to-boost-business-growth/",
+        "/tools-and-tips-to-successfully-organize-your-small-business/",
+        "/writing-a-business-case-what-it-is-and-how-to-write/"
+      ]
+    },
+    "/category/uncategorized/": {
+      "status": "200",
+      "posts": [
+        "/hello-world/"
+      ]
+    },
+    "/author/hostsuperbillonegmail-com/": {
+      "status": "200",
+      "posts": [
+        "/hello-world/",
+        "/why-startups-fail-11-mistakes-founders-keep-making/",
+        "/the-8-step-process-we-used-to-start-a-successful-podcast/",
+        "/be-remarkable-how-to-make-your-business-stand-out/",
+        "/what-effect-will-ai-have-on-construction/",
+        "/20-business-blogs-that-will-blow-your-mind/",
+        "/the-best-saas-tools-to-boost-business-growth/",
+        "/want-to-grow-your-business-you-need-a-growth-strategy/",
+        "/tools-and-tips-to-successfully-organize-your-small-business/",
+        "/writing-a-business-case-what-it-is-and-how-to-write/"
+      ]
+    },
+    "/author/hostsuperbillonegmail-com/page/2/": {
+      "status": "200",
+      "posts": [
+        "/5-stages-of-team-development-what-you-need-to-know/"
+      ]
+    }
+  }
+}
