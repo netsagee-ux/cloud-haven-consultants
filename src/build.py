@@ -10,7 +10,7 @@ if (ROOT/'src/extra-guides.json').is_file():
     GUIDES+=json.loads((ROOT/'src/extra-guides.json').read_text())
 EXTRAS=json.loads((ROOT/'src/service-extras.json').read_text())
 ARCHIVES=json.loads((ROOT/'src/archives.json').read_text())
-GIMAGE={'Digital marketing':'digital','Healthcare revenue':'healthcare','Business consultancy':'business','Roman Urdu':'digital'}
+GIMAGE={'Digital marketing':'digital','Healthcare revenue':'healthcare','Business consultancy':'business'}
 GUIDEHOME={'digital':'/blog/what-is-an-seo-audit/','healthcare':'/blog/what-is-medical-billing/','business':'/blog/what-does-a-business-consultant-do/'}
 def cards(items):
  return '<div class="editorial-steps">'+''.join(f'<article><h3>{h(q)}</h3><p>{h(a)}</p></article>' for q,a in items)+'</div>'
@@ -92,8 +92,8 @@ def company():
  body+=sect('Pricing models','How engagements are priced.',cards([('Monthly marketing','An agreed monthly scope covers search, content or social campaigns. Marketing retainers typically begin with a three-month term. Advertising spend is budgeted separately.'),('Projects and advice','An audit or a defined consulting project has a written scope, milestones and deliverables. Site size, complexity, available data and team capacity affect the quote.'),('Healthcare revenue','The billing proposal may use a per-claim fee or a share of collections. Claim volume, payer mix and the work retained by your practice affect the model.')]))
  body+=f'''<section class="contact-layout container" id="quote"><div>{eyebrow('Request a quote')}<h2 class="standalone">Build your brief.</h2><p class="large-muted">Share a starting point for the conversation. We’ll carry your answers into the enquiry form.</p></div><form class="enquiry-form" action="/contact/"><div class="field"><label for="scope">Practice</label><select id="scope" name="service">{''.join(f'<option>{h(v["name"])}</option>' for v in PRACTICES.values())}</select></div><div class="field"><label for="brief">What should the work cover?</label><textarea required id="brief" name="brief" rows="3" maxlength="1500" placeholder="Current situation, goals and timing"></textarea></div><button class="pill">Continue to enquiry {icon("arr")}</button></form></section>'''
  doc('/pricing/','Pricing',rec['summary'],body)
-def guide_list(path,title,intro,items,archive=False,roman=False):
- body=subhero('Insights' if not roman else 'Roman Urdu',title,intro,'editorial/research' if path=='/blog/' else '',photo_alt='Three people comparing information on their phones')
+def guide_list(path,title,intro,items,archive=False):
+ body=subhero('Insights',title,intro,'editorial/research' if path=='/blog/' else '',photo_alt='Three people comparing information on their phones')
  cats=list(GIMAGE)
  if not archive:
   body+='<div class="filter-bar container"><div class="chips filter-chips" aria-label="Filter guides by practice">'+''.join(f'<button type="button" data-filter="{h(c)}" aria-pressed="{str(i==0).lower()}">{h(c)}</button>' for i,c in enumerate(['All topics',*cats]))+'</div><label class="guide-search">'+icon('search')+'<span class="sr-only">Search guides</span><input type="search" id="guide-search" placeholder="Search guides"></label></div>'
@@ -109,8 +109,7 @@ def guide_list(path,title,intro,items,archive=False,roman=False):
  if archive:body+='<div class="container archive-out">'+btn('All insights','/blog/','text-link')+'</div>'
  doc(path,title.rstrip('.'),intro,body+end_cta())
 def write_guides():
- guide_list('/blog/','Field notes.','Practical reading on search, healthcare revenue and running a business. Browse guides in English and Roman Urdu.',GUIDES)
- guide_list('/blog/category/roman-urdu/','Roman Urdu guides.','Search aur digital marketing ko seedhi Roman Urdu mein samjhein.',[v for v in GUIDES if v['category']=='Roman Urdu'],True,True)
+ guide_list('/blog/','Field notes.','Advice on search visibility, medical billing and business operations. Browse by practice or search for a specific question.',GUIDES)
  hello={'path':'/hello-world/','category':'Business consultancy','lang':'en','title':'Welcome to Cloud Haven','summary':'Find the practice and reading material that fit your business.','sections':[{'heading':'Explore the firm','text':'Our team works across search, healthcare revenue and business consulting. Start with our service directory to see which practice fits your priorities.'}]}
  store={r['path']:r for r in [*GUIDES,hello]}
  for v in store.values():
@@ -140,7 +139,7 @@ def photography():
  doc('/photography/','Photography credits','Original photographers and editorial image sources.',body)
 def policies():
  for path, title, intro, items in [
-  ('/privacy-policy/','Privacy.','How this site handles an enquiry.',[('Contact details','The enquiry form uses the information you enter to prepare an email draft on your device. You choose whether to send it. Your email provider then handles delivery.'),('Browsing','This website does not set advertising cookies. It may use session storage in your browser to remember whether you have seen the opening animation. If you add services to your brief, the site stores their names on this device so they are here when you return. You can remove each selection in Your brief. The hosting service may process ordinary connection and access information.'),('Healthcare enquiries','Keep messages at the business level. Please send only the details needed to arrange a conversation, and leave out patient records and medical identifiers.'),('Privacy questions','For enquiries about an email you sent to the firm, contact '+EMAIL+'.')]),
+  ('/privacy-policy/','Privacy.','How this site handles an enquiry.',[('Contact details','The enquiry form uses the information you enter to prepare an email draft on your device. You choose whether to send it. Your email provider then handles delivery.'),('Browsing','This website does not set advertising cookies. If you add services to your brief, the site stores their names on this device so they are here when you return. You can remove each selection in Your brief. The hosting service may process ordinary connection and access information.'),('Healthcare enquiries','Keep messages at the business level. Please send only the details needed to arrange a conversation, and leave out patient records and medical identifiers.'),('Privacy questions','For enquiries about an email you sent to the firm, contact '+EMAIL+'.')]),
   ('/terms/','Website terms.','Using the information and enquiry tools on this website.',[('Service information','The directory describes areas of work available for discussion. Project scope, fees, delivery dates and responsibilities are agreed in a separate written proposal.'),('Editorial guides','The guides are general information for business teams. A practice or business should review the specific requirements that apply to its own work.'),('Enquiries','Opening an email draft does not submit a booking or start a paid engagement. Review and send the draft to contact the firm.')])]:
   doc(path,title.rstrip('.'),intro,subhero('Website information',title,intro)+sect('Information',title,cards(items)))
 def alias(path,target):
@@ -148,6 +147,7 @@ def alias(path,target):
  file.write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cloud Haven Consultants</title><meta name="robots" content="noindex,follow"><link rel="canonical" href="{h(HOST+target)}"><meta http-equiv="refresh" content="0; url={h(target)}"></head><body style="background:#f6f6ef;color:#183b32;font:20px system-ui"><a style="color:inherit" href="{h(target)}">Continue to Cloud Haven Consultants</a></body></html>')
 def build():
  write_service_data();homepage();service_hub();service_pages();brief_page();contact();company();write_guides();policies();photography()
+ for path,target in json.loads((ROOT/'src/guide-redirects.json').read_text()).items():alias(path,target)
  for path,target in {'/blog/how-to-choose-seo-agency/':'/blog/how-to-choose-an-seo-agency/','/services-2/':'/services/','/2240-2/':'/management-consulting-services/','/business-consultancy-services-in-pakistan/':'/business-consultancy-pakistan/','/seo-agency-in-pakistan-cloud-haven-consultants/':'/seo-agency-pakistan/','/startup-consultant-in-pakistan-cloud-haven-consultants/':'/startup-consultant-pakistan/','/local-seo-multan/':'/local-seo-services/','/seo-agency-multan/':'/seo-agency-pakistan/','/business-consultancy-multan/':'/business-consultancy-pakistan/'}.items():alias(path,target)
  doc('/not-found/','Page not found','Find your way back to Cloud Haven.',subhero('404','Page not found.','Try the service directory or return to the homepage.',links=btn('Home','/')+btn('All services','/services/','text-link')),noindex=True);copyfile(DIST/'not-found/index.html',DIST/'404.html')
  sitemap=[HOST+'/'+p.parent.relative_to(DIST).as_posix().strip('./')+('/' if p.parent!=DIST else '') for p in sorted(DIST.rglob('index.html')) if 'noindex,follow' not in p.read_text()]

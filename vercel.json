@@ -2,5 +2,37 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "buildCommand": "python3 src/build.py",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/blog/category/roman-urdu",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/seo-kya-hai",
+      "destination": "/seo-agency-pakistan/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/digital-marketing-kya-hai",
+      "destination": "/digital-marketing-agency-pakistan/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/business-consultant-kya-hota-hai",
+      "destination": "/blog/what-does-a-business-consultant-do/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/local-seo-kya-hai",
+      "destination": "/blog/what-is-local-seo/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/social-media-marketing-kya-hai",
+      "destination": "/blog/social-media-marketing-for-small-business/",
+      "permanent": true
+    }
+  ]
 }

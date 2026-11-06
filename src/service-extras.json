@@ -7,7 +7,7 @@
       },
       {
         "q": "Which language should our pages use?",
-        "a": "We look at how your customers search, then plan English, Urdu or Roman Urdu content to suit those searches."
+        "a": "We review the words customers use when they search, then agree which languages to prioritise for each page."
       },
       {
         "q": "What access helps you get started?",
@@ -94,8 +94,8 @@
         "a": "A writer interviews your subject expert and asks them to review the draft. Editorial review and fact-checking are part of the process."
       },
       {
-        "q": "Are Urdu and Roman Urdu available?",
-        "a": "English is the main publishing language. Urdu or Roman Urdu pieces can be discussed for the specific audience and brief."
+        "q": "How do you choose the language for each piece?",
+        "a": "We usually publish in English. If your readers prefer a different language, we agree the writing and review process in the brief."
       }
     ],
     "deliverables": [
@@ -115,7 +115,7 @@
         "a": "You pay the advertising platform directly. The management fee covers the agreed planning, creative and campaign work."
       },
       {
-        "q": "Can we use English and Roman Urdu together?",
+        "q": "Can we publish in more than one language?",
         "a": "Yes. Publishing language follows your brand and the way customers use the channel."
       }
     ],
