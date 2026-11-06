@@ -34,21 +34,36 @@ const filters=$$('[data-filter]');
 if(filters.length){
   let chosen='All topics';
   const search=$('#guide-search');
+  const list=$$('.guide-row');
+  const more=$('.guide-more');
+  const batchSize=8;
+  let limit=batchSize;
   function update(){
     let count=0;
     const term=search.value.trim().toLocaleLowerCase();
-    $$('.guide-row').forEach(row=>{
-      row.hidden=(chosen!=='All topics' && row.dataset.category!==chosen)||!row.textContent.toLocaleLowerCase().includes(term);
-      if(!row.hidden)count++;
+    list.forEach(row=>{
+      const matches=(chosen==='All topics'||row.dataset.category===chosen)
+        && (row.textContent+' '+row.dataset.summary).toLocaleLowerCase().includes(term);
+      row.hidden=!matches||count>=limit;
+      if(matches)count++;
     });
-    $('.results-count').textContent=count+(count===1?' guide':' guides');
-    $('.no-results').hidden=!!count;
+    $('.results-count').textContent=count>limit?'Showing '+limit+' of '+count+' guides':count+(count===1?' guide':' guides');
+    $('.no-results').hidden=Boolean(count);
+    more.hidden=count<=limit;
   }
+  function startSearch(){limit=batchSize;update()}
+  more.addEventListener('click',()=>{
+    const previouslyHidden=new Set(list.filter(row=>row.hidden));
+    limit+=batchSize;
+    update();
+    list.find(row=>previouslyHidden.has(row)&&!row.hidden)?.focus({preventScroll:true});
+  });
   filters.forEach(b=>b.addEventListener('click',()=>{
     chosen=b.dataset.filter;
-    filters.forEach(f=>f.setAttribute('aria-pressed',String(f===b)));update();
+    filters.forEach(f=>f.setAttribute('aria-pressed',String(f===b)));startSearch();
   }));
-  search.addEventListener('input',update);
+  search.addEventListener('input',startSearch);
+  update();
 }
 const form=$('#enquiry');
 if(form){

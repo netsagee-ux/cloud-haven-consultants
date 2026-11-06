@@ -1,7 +1,7 @@
 PRACTICES = {
- 'digital': {'name':'SEO & digital marketing','short':'Digital marketing','image':'digital','intro':'Reach the people already looking for your business. We connect search, content and campaigns to the enquiries that follow.','audience':'Local and national brands','alt':'Two analysts discussing a campaign dashboard in a modern studio.'},
- 'healthcare': {'name':'Healthcare revenue','short':'Healthcare revenue','image':'healthcare','intro':'Follow each claim from the first eligibility check to payment. Our billing team works with US practices in partnership with SuperBillOne LLC.','audience':'US medical practices','alt':'A physician in teal scrubs reviewing a billing record with a clinic administrator.'},
- 'business': {'name':'Business consultancy','short':'Business consultancy','image':'business','intro':'Give your team a plan it can run. We help founders and managers set priorities, improve handoffs and see where work gets stuck.','audience':'Founders and growing teams','alt':'Business owners reviewing financial plans with a consultant around a meeting table.'}
+ 'digital': {'name':'SEO & digital marketing','short':'Digital marketing','image':'digital','intro':'Reach new customers through search, content and paid campaigns.','audience':'Local and national brands','alt':'Two analysts discussing a campaign dashboard in a modern studio.'},
+ 'healthcare': {'name':'Healthcare revenue','short':'Healthcare revenue','image':'healthcare','intro':'Track claims, resolve denials and collect payments for your practice.','audience':'US medical practices','alt':'A physician in teal scrubs reviewing a billing record with a clinic administrator.'},
+ 'business': {'name':'Business consultancy','short':'Business consultancy','image':'business','intro':'Set priorities, clarify responsibilities and improve daily operations.','audience':'Founders and growing teams','alt':'Business owners reviewing financial plans with a consultant around a meeting table.'}
 }
 # Route, label and short directory description
 SERVICES = {

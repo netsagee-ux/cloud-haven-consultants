@@ -16,13 +16,13 @@ def cards(items):
  return '<div class="editorial-steps">'+''.join(f'<article><h3>{h(q)}</h3><p>{h(a)}</p></article>' for q,a in items)+'</div>'
 def sections(rec):return [(s['heading'],s['text']) for s in rec['sections']]
 def rows(items):
- return '<div class="dir-rows">'+''.join(f'<a href="{h(link)}"><div><h3>{h(title)}</h3><p>{h(desc)}</p></div>{icon("ne")}</a>' for title,link,desc in items)+'</div>'
+ return '<div class="dir-rows">'+''.join(f'<a href="{h(link)}"><div><h3>{h(title)}</h3>'+ (f'<p>{h(desc)}</p>' if desc else '') + f'</div>{icon("ne")}</a>' for title,link,desc in items)+'</div>'
 def service_hub():
- body=subhero('Services','Our services.','Explore three connected practices. Choose the help you need now, from a focused audit to ongoing support.')
+ body=subhero('Services','Our services.','Choose a practice to explore its services.')
  tiles=''.join(f'<a class="service-tile" href="#{key}">{photo_image(key,sizes="(max-width: 700px) 100vw, 32vw")}<span><small>{len(SERVICES[key])} services</small><strong>{h(item["short"])}</strong></span>{icon("down")}</a>' for key,item in PRACTICES.items())
  body+=f'<nav class="practice-shelf container" aria-label="Practice directory">{tiles}</nav>'
  for k,v in PRACTICES.items():
-  body+=f'<section id="{k}" class="directory container"><div class="dir-head">{eyebrow(v["audience"])}<h2>{h(v["name"])}</h2><p>{h(v["intro"])}</p></div>'+rows([(title,'/'+slug+'/',desc) for slug,title,desc in SERVICES[k]])+'</section>'
+  body+=f'<section id="{k}" class="directory container"><div class="dir-head"><h2>{h(v["name"])}</h2></div>'+rows([(title,'/'+slug+'/',None) for slug,title,desc in SERVICES[k]])+'</section>'
  doc('/services/','Services',PAGES['/services/']['summary'],body+end_cta())
 def service_pages():
  for k,group in SERVICES.items():
@@ -33,14 +33,14 @@ def service_pages():
    photo=PHOTOGRAPHY[slug]['asset']
    description=PHOTOGRAPHY[slug]['alt']
    body=subhero(v['short'],title+'.',rec['summary'],photo,action,('Services','/services/'),photo_alt=description)
-   body+=sect('Scope of work','What we work on.',cards(sections(rec)))
+   body+=sect('Scope of work.',details(sections(rec)))
    extra=EXTRAS[path]
-   body+=sect('Deliverables','What you receive.','<ul class="deliverables">'+''.join(f'<li>{h(d)}</li>' for d in extra['deliverables'])+'</ul>')
+   body+=sect('What you receive.','<ul class="deliverables">'+''.join(f'<li>{h(d)}</li>' for d in extra['deliverables'])+'</ul>')
    if k=='healthcare':
-    body+=sect('Delivery partner','US healthcare operations.', '<p>Cloud Haven coordinates billing work with SuperBillOne LLC, a US-registered medical billing company in Austin, Texas. Your introductory call covers the practice workflow, payer mix and the responsibilities on each side.</p>'+btn('Meet the billing partner','https://superbillone.com/','text-link'))
-   body+=sect('Questions','Before you start.',details([(qa['q'],qa['a']) for qa in extra['faq']]))
+    body+=sect('US healthcare operations.', '<p>We coordinate US billing with SuperBillOne LLC in Austin, Texas.</p>'+btn('Meet the billing partner','https://superbillone.com/','text-link'))
+   body+=sect('Common questions.',details([(qa['q'],qa['a']) for qa in extra['faq']]))
    related=[group[(j+a)%len(group)] for a in (1,2)]
-   body+=sect('Next steps','Related services.',rows([(t,'/'+s+'/',d) for s,t,d in related])+btn('All '+v['short']+' services','/services/#'+k,'text-link'))
+   body+=sect('Related services.',rows([(t,'/'+s+'/',None) for s,t,d in related]))
    related_guides={
     'seo-agency-pakistan':['seo-cost-pakistan','how-to-choose-an-seo-agency'],
     'seo-audit-services':['what-is-an-seo-audit','keyword-research-for-beginners'],
@@ -48,7 +48,7 @@ def service_pages():
     'local-seo-services':['what-is-local-seo','google-business-profile-setup'],
     'content-marketing-services':['content-marketing-strategy','how-to-brief-a-content-writer'],
     'social-media-marketing-agency-pakistan':['social-media-marketing-for-small-business','facebook-ads-for-beginners'],
-    'digital-marketing-agency-pakistan':['digital-marketing-kya-hai','seo-vs-sem'],
+    'digital-marketing-agency-pakistan':['content-marketing-strategy','seo-vs-sem'],
     'medical-billing-services-pakistan':['what-is-medical-billing','how-to-choose-a-medical-billing-company'],
     'medical-billing-services-usa':['medical-billing-contract-checklist','medical-billing-cost'],
     'revenue-cycle-management-services':['what-is-revenue-cycle-management','rcm-metrics-to-track'],
@@ -61,35 +61,40 @@ def service_pages():
     'management-consulting-services':['business-consultant-vs-business-analyst','what-is-process-improvement'],
     'process-improvement-consulting':['what-is-process-improvement','what-does-a-business-consultant-do']}
    reading={f'/blog/{r}/' for r in related_guides[slug]}
-   body+=sect('Field notes','Further reading.',rows([(g['title'],g['path'],g['summary']) for g in GUIDES if g['path'] in reading]))
+   body+=sect('Further reading.',rows([(g['title'],g['path'],None) for g in GUIDES if g['path'] in reading]))
    doc(path,title,rec['summary'],body+end_cta())
 def contact():
- body=subhero('Contact','Let’s talk.','Tell us a little about your business and what you’d like to change. The first consultation is free.')
+ body=subhero('Contact','Let’s talk.','Arrange a free 30-minute consultation.')
  opts=['Not sure yet',*[v['name'] for v in PRACTICES.values()],*[t for g in SERVICES.values() for _,t,_ in g],'Careers','Reference or sample report']
- body+=f'''<section class="contact-layout container"><div><div class="contact-info">{eyebrow('Contact the team')}<h2>Multan, Pakistan.</h2><p>Monday–Saturday<br>9:00 am–6:00 pm PKT</p><p>For a US call, include your time zone so we can arrange a suitable time.</p><a href="mailto:{EMAIL}">{EMAIL}</a><a href="tel:+923421958957">{PHONE}</a></div></div>
- <form id="enquiry" class="enquiry-form" action="mailto:{EMAIL}" method="post" enctype="text/plain"><h2>Project enquiry.</h2><div class="field-pair"><div class="field"><label for="ename">Your name</label><input id="ename" name="name" required maxlength="100" autocomplete="name"></div><div class="field"><label for="em">Email address</label><input id="em" name="email" type="email" required maxlength="254" autocomplete="email"></div></div><div class="field"><label for="org">Company (optional)</label><input id="org" name="company" maxlength="150" autocomplete="organization"></div><div class="field"><label for="service">What can we help with?</label><select id="service" name="service">{''.join(f'<option>{h(o)}</option>' for o in opts)}</select></div><div class="field"><label for="message">Your message</label><textarea id="message" name="message" rows="5" required maxlength="1800" placeholder="A little about your project, priorities and timeline"></textarea></div><p class="form-hint">Please leave patient details out of your enquiry.</p><button class="pill" type="submit">Prepare email {icon('ne')}</button><p class="form-hint">Opens a draft in your email app for you to review and send.</p><div class="form-status" role="status" hidden></div></form></section>'''
- body+=sect('After your enquiry','What happens next.',cards([('An initial conversation','Use a free 30-minute call to explain your priorities and decide which service fits.'),('A written scope','Review the proposed work, timescale and price before deciding whether to proceed.')]))
+ body+=f'''<section class="contact-layout container"><div><div class="contact-info"><h2>Multan, Pakistan.</h2><p>Monday–Saturday<br>9:00 am–6:00 pm PKT</p><p>For a US call, include your time zone so we can arrange a suitable time.</p><a href="mailto:{EMAIL}">{EMAIL}</a><a href="tel:+923421958957">{PHONE}</a></div></div>
+ <form id="enquiry" class="enquiry-form" action="mailto:{EMAIL}" method="post" enctype="text/plain"><h2>Project enquiry.</h2><div class="field-pair"><div class="field"><label for="ename">Your name</label><input id="ename" name="name" required maxlength="100" autocomplete="name"></div><div class="field"><label for="em">Email address</label><input id="em" name="email" type="email" required maxlength="254" autocomplete="email"></div></div><div class="field"><label for="org">Company (optional)</label><input id="org" name="company" maxlength="150" autocomplete="organization"></div><div class="field"><label for="service">What can we help with?</label><select id="service" name="service">{''.join(f'<option>{h(o)}</option>' for o in opts)}</select></div><div class="field"><label for="message">Your message</label><textarea id="message" name="message" rows="5" required maxlength="1800" placeholder="A little about your project, priorities and timeline"></textarea></div><p class="form-hint">Omit patient information.</p><button class="pill" type="submit">Prepare email {icon('ne')}</button><p class="form-hint">Opens your email app.</p><div class="form-status" role="status" hidden></div></form></section>'''
+ body+=sect('After your call.','<p>We’ll send a written scope, timeline and price for you to review.</p>')
  doc('/contact/','Contact',PAGES['/contact/']['summary'],body)
 def company():
  rec=PAGES['/about/']
  body=subhero('The firm','Independent advice. Shared direction.',rec['summary'],'editorial/firm',btn('Work with us','/contact/'),photo_alt='Colleagues reviewing work together around a table')
- body+=f'''<section class="leadership container" id="leadership"><figure class="founder-photo">{photo_image('editorial-menu')}</figure><div>{eyebrow('Leadership')}<h2 class="display">Umar M.</h2><p class="founder-role">Founder &amp; CEO</p><p>Umar leads Cloud Haven from Multan, Pakistan. The firm brings digital marketing, business consulting and healthcare revenue support together through one point of contact.</p>{btn('Explore the services','/services/','text-link','arr')}</div></section>'''
- body+=sect('About Cloud Haven','A team built around your business.',cards([('One person to call','You have one contact for your account. When an issue crosses from marketing into operations, the two teams can work from the same brief.'),('A written plan','We agree what the work covers, who is responsible and how to measure progress. Reviews cover what changed and what to do next.'),('A US billing partner','SuperBillOne LLC, based in Austin, Texas, delivers healthcare revenue work with Cloud Haven. We coordinate with US medical practices during their working hours.')]))
- body+=sect('Explore the firm','Working with us.',rows([('Careers','/careers/','Explore the disciplines we recruit for and introduce yourself.'),('Case studies','/case-studies/','See how client evidence is measured and shared.'),('Pricing','/pricing/','Learn how we scope work and prepare a quote.')]))
+ body+=f'''<section class="leadership container" id="leadership"><figure class="founder-photo">{photo_image('editorial-menu')}</figure><div>{eyebrow('Leadership')}<h2 class="display">Umar M.</h2><p class="founder-role">Founder &amp; CEO</p><p>Umar leads the consulting team in Multan, Pakistan.</p>{btn('Explore the services','/services/','text-link','arr')}</div></section>'''
+ steps=[('Discover','Understand the problem.','We discuss your priorities, constraints and measures of success.'),
+        ('Plan','Agree the scope.','Your written proposal sets out the work, timeline and price.'),
+        ('Deliver','Review progress.','One account lead tracks delivery and agrees the next steps with you.')]
+ tabs=''.join(f'<button type="button" id="step-{i}" data-step="{i}" aria-controls="method-{i}">{h(label)}</button>' for i,(label,_,_) in enumerate(steps))
+ panels=''.join(f'<div id="method-{i}" class="framework-panel" aria-labelledby="step-{i}"><h3>{h(title)}</h3><p>{h(detail)}</p></div>' for i,(_,title,detail) in enumerate(steps))
+ body+=sect('How we work.',f'<div class="framework about-method"><div class="framework-steps" aria-label="How we work">{tabs}</div>{panels}</div>')
+ body+=sect('Working with us.',rows([('Careers','/careers/','Explore the disciplines we recruit for and introduce yourself.'),('Case studies','/case-studies/','See how client evidence is measured and shared.'),('Pricing','/pricing/','Learn how we scope work and prepare a quote.')]))
  doc('/about/','About Cloud Haven',rec['summary'],body+end_cta())
  rec=PAGES['/careers/']
  body=subhero('Careers','Work with Cloud Haven.',rec['summary'],'editorial/careers',btn('Introduce yourself','mailto:'+EMAIL+'?subject=Career%20enquiry'),photo_alt='A group gathered around a laptop at work')
- body+=sect('Opportunities','Where you can contribute.',cards([('Healthcare operations','Claims submission, accounts receivable, denial follow-up and provider credentialing for US medical practices.'),('Search and content','Technical SEO, content planning, campaign delivery and reporting for local and national businesses.'),('Business consulting','Process mapping, analysis and practical planning for founders and management teams.')]))
- body+=sect('Applications','Send a short introduction.',f'<p>Tell us the role you’re interested in, where you’re based and one relevant example of your work. Attach your CV to your email. The team accepts introductions even between hiring rounds.</p>{btn("Email your CV","mailto:"+EMAIL+"?subject=Career%20enquiry","text-link")}')
+ body+=sect('Where you can contribute.',cards([('Healthcare operations','Claims submission, accounts receivable, denial follow-up and provider credentialing for US medical practices.'),('Search and content','Technical SEO, content planning, campaign delivery and reporting for local and national businesses.'),('Business consulting','Process mapping, analysis and practical planning for founders and management teams.')]))
+ body+=sect('Send a short introduction.',f'<p>Tell us the role you’re interested in, where you’re based and one relevant example of your work. Attach your CV to your email. The team accepts introductions even between hiring rounds.</p>{btn("Email your CV","mailto:"+EMAIL+"?subject=Career%20enquiry","text-link")}')
  doc('/careers/','Careers',rec['summary'],body)
  rec=PAGES['/case-studies/']
  body=subhero('Case studies','Evidence behind the work.',rec['summary'],'editorial/case-review',btn('Request a reference','/contact/?service=Reference%20or%20sample%20report'),photo_alt='Colleagues looking over printed charts at a meeting')
- body+=sect('Our approach','How a case is documented.',cards([('Agree the baseline','Choose the question, the measure and a time period before work starts. For billing, the team can review aggregate claims, denials and payment data.'),('Record the changes','Document the work, compare the same measure over a comparable period and explain other factors that affect the result.'),('Get client approval','The client reviews the wording and the figures before publication. Healthcare examples exclude identifiable patient information.')]))
- body+=sect('Available by request','References and sample reports.','<p>The firm is preparing its approved case studies. In the meantime, you can ask for a sample report using illustrative data, or a reference call subject to the client’s agreement.</p>'+btn('Request a sample','/contact/?service=Reference%20or%20sample%20report','text-link'))
+ body+=sect('How a case is documented.',cards([('Agree the baseline','Choose the question, the measure and a time period before work starts. For billing, the team can review aggregate claims, denials and payment data.'),('Record the changes','Document the work, compare the same measure over a comparable period and explain other factors that affect the result.'),('Get client approval','The client reviews the wording and the figures before publication. Healthcare examples exclude identifiable patient information.')]))
+ body+=sect('References and sample reports.','<p>The firm is preparing its approved case studies. In the meantime, you can ask for a sample report using illustrative data, or a reference call subject to the client’s agreement.</p>'+btn('Request a sample','/contact/?service=Reference%20or%20sample%20report','text-link'))
  doc('/case-studies/','Case studies',rec['summary'],body)
  rec=PAGES['/pricing/']
  body=subhero('Pricing','Scope first. Then a quote.',rec['summary'],links=btn('Build your brief','#quote','pill','down'))
- body+=sect('Pricing models','How engagements are priced.',cards([('Monthly marketing','An agreed monthly scope covers search, content or social campaigns. Marketing retainers typically begin with a three-month term. Advertising spend is budgeted separately.'),('Projects and advice','An audit or a defined consulting project has a written scope, milestones and deliverables. Site size, complexity, available data and team capacity affect the quote.'),('Healthcare revenue','The billing proposal may use a per-claim fee or a share of collections. Claim volume, payer mix and the work retained by your practice affect the model.')]))
+ body+=sect('How engagements are priced.',cards([('Monthly marketing','An agreed monthly scope covers search, content or social campaigns. Marketing retainers typically begin with a three-month term. Advertising spend is budgeted separately.'),('Projects and advice','An audit or a defined consulting project has a written scope, milestones and deliverables. Site size, complexity, available data and team capacity affect the quote.'),('Healthcare revenue','The billing proposal may use a per-claim fee or a share of collections. Claim volume, payer mix and the work retained by your practice affect the model.')]))
  body+=f'''<section class="contact-layout container" id="quote"><div>{eyebrow('Request a quote')}<h2 class="standalone">Build your brief.</h2><p class="large-muted">Share a starting point for the conversation. We’ll carry your answers into the enquiry form.</p></div><form class="enquiry-form" action="/contact/"><div class="field"><label for="scope">Practice</label><select id="scope" name="service">{''.join(f'<option>{h(v["name"])}</option>' for v in PRACTICES.values())}</select></div><div class="field"><label for="brief">What should the work cover?</label><textarea required id="brief" name="brief" rows="3" maxlength="1500" placeholder="Current situation, goals and timing"></textarea></div><button class="pill">Continue to enquiry {icon("arr")}</button></form></section>'''
  doc('/pricing/','Pricing',rec['summary'],body)
 def guide_list(path,title,intro,items,archive=False):
@@ -98,7 +103,8 @@ def guide_list(path,title,intro,items,archive=False):
  if not archive:
   body+='<div class="filter-bar container"><div class="chips filter-chips" aria-label="Filter guides by practice">'+''.join(f'<button type="button" data-filter="{h(c)}" aria-pressed="{str(i==0).lower()}">{h(c)}</button>' for i,c in enumerate(['All topics',*cats]))+'</div><label class="guide-search">'+icon('search')+'<span class="sr-only">Search guides</span><input type="search" id="guide-search" placeholder="Search guides"></label></div>'
  body+='<section class="guide-list container" aria-label="Guides"><p class="results-count micro" aria-live="polite">'+str(len(items))+' guides</p>'
- body+=''.join(f'<a class="guide-row" data-category="{h(v["category"])}" href="{h(v["path"])}"><span class="entry-category">{h(v["category"])}</span><div><h2>{h(v["title"])}</h2><p>{h(v["summary"])}</p></div>{icon("ne")}</a>' for v in items)
+ body+=''.join(f'<a class="guide-row" data-category="{h(v["category"])}" data-summary="{h(v["summary"])}" href="{h(v["path"])}"><span class="entry-category">{h(v["category"])}</span><div><h2>{h(v["title"])}</h2></div>{icon("ne")}</a>' for v in items)
+ if not archive:body+='<button class="guide-more text-link" type="button" hidden>Show more guides</button>'
  body+='<p class="no-results" hidden>No guides match your search. Try another term or choose All topics.</p></section>'
  if path=='/blog/':
   categories=[p for p in ARCHIVES['archives'] if p.startswith('/category/')]
@@ -109,7 +115,7 @@ def guide_list(path,title,intro,items,archive=False):
  if archive:body+='<div class="container archive-out">'+btn('All insights','/blog/','text-link')+'</div>'
  doc(path,title.rstrip('.'),intro,body+end_cta())
 def write_guides():
- guide_list('/blog/','Field notes.','Advice on search visibility, medical billing and business operations. Browse by practice or search for a specific question.',GUIDES)
+ guide_list('/blog/','Field notes.','Browse advice on marketing, medical billing and business strategy.',GUIDES)
  hello={'path':'/hello-world/','category':'Business consultancy','lang':'en','title':'Welcome to Cloud Haven','summary':'Find the practice and reading material that fit your business.','sections':[{'heading':'Explore the firm','text':'Our team works across search, healthcare revenue and business consulting. Start with our service directory to see which practice fits your priorities.'}]}
  store={r['path']:r for r in [*GUIDES,hello]}
  for v in store.values():
@@ -135,13 +141,13 @@ def photography():
     label='Pinterest' if 'pinterest.' in ref else ('Dribbble' if 'dribbble.com' in ref else 'Company website')
     links+=f' <a href="{h(ref)}">{label} ↗</a>'
    credit_rows.append(f'<li><strong>{h(item["title"])}</strong><span>{h(item["photographer"])}</span><div>{links}</div></li>')
-  body+=sect('Credits',heading,'<ul class="credits-list">'+''.join(credit_rows)+'</ul>')
+  body+=sect(heading,'<ul class="credits-list">'+''.join(credit_rows)+'</ul>')
  doc('/photography/','Photography credits','Original photographers and editorial image sources.',body)
 def policies():
  for path, title, intro, items in [
   ('/privacy-policy/','Privacy.','How this site handles an enquiry.',[('Contact details','The enquiry form uses the information you enter to prepare an email draft on your device. You choose whether to send it. Your email provider then handles delivery.'),('Browsing','This website does not set advertising cookies. If you add services to your brief, the site stores their names on this device so they are here when you return. You can remove each selection in Your brief. The hosting service may process ordinary connection and access information.'),('Healthcare enquiries','Keep messages at the business level. Please send only the details needed to arrange a conversation, and leave out patient records and medical identifiers.'),('Privacy questions','For enquiries about an email you sent to the firm, contact '+EMAIL+'.')]),
   ('/terms/','Website terms.','Using the information and enquiry tools on this website.',[('Service information','The directory describes areas of work available for discussion. Project scope, fees, delivery dates and responsibilities are agreed in a separate written proposal.'),('Editorial guides','The guides are general information for business teams. A practice or business should review the specific requirements that apply to its own work.'),('Enquiries','Opening an email draft does not submit a booking or start a paid engagement. Review and send the draft to contact the firm.')])]:
-  doc(path,title.rstrip('.'),intro,subhero('Website information',title,intro)+sect('Information',title,cards(items)))
+  doc(path,title.rstrip('.'),intro,subhero('Website information',title,intro)+sect(title,cards(items)))
 def alias(path,target):
  file=DIST/path.strip('/')/'index.html';file.parent.mkdir(parents=True,exist_ok=True)
  file.write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cloud Haven Consultants</title><meta name="robots" content="noindex,follow"><link rel="canonical" href="{h(HOST+target)}"><meta http-equiv="refresh" content="0; url={h(target)}"></head><body style="background:#f6f6ef;color:#183b32;font:20px system-ui"><a style="color:inherit" href="{h(target)}">Continue to Cloud Haven Consultants</a></body></html>')
