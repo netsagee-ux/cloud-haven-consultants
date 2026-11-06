@@ -2,7 +2,6 @@
    until the environment, model and first GPU frame have all finished. */
 const mount=document.getElementById('instrument');
 const surface=document.getElementById('globe-surface');
-const controls=document.querySelector('.object-controls');
 const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)');
 
 async function createWebGLView(){
@@ -97,17 +96,18 @@ async function createTurntableView(){
 }
 
 async function activateGlobe(){
-  if(!mount||!surface||!controls)return;
+  if(!mount||!surface)return;
   let view;
   try{view=await createWebGLView()}catch{view=await createTurntableView()}
-  const pause=controls.querySelector('.motion-toggle');
   let visible=true, paused=motionQuery.matches, activePointer=null, lastX=0;
+  let pointerStartX=0, pointerStartY=0, dragged=false;
   let spin=motionQuery.matches?0:-.20,targetSpin=0,velocity=0,request=0,previous=0,ready=false;
   let scrollAmount=0,baseYaw=0;
   let dirty=true;
-  function refreshControl(){
-    pause.setAttribute('aria-pressed',String(paused));
-    pause.setAttribute('aria-label',paused?'Play globe rotation':'Pause globe rotation');
+  function setPaused(value){
+    paused=value;
+    surface.setAttribute('aria-description','Drag or use the left and right arrow keys to turn. Tap or press Space to '+(paused?'resume.':'pause.'));
+    previous=0;dirty=true;schedule();
   }
   function schedule(){
     if(!request&&visible&&!document.hidden)request=requestAnimationFrame(draw);
@@ -133,8 +133,11 @@ async function activateGlobe(){
       ready=true;
       surface.replaceChildren(view.canvas);
       mount.dataset.renderer=view.mode;
-      controls.hidden=false;
-      refreshControl();
+      surface.tabIndex=0;
+      surface.setAttribute('role','group');
+      surface.setAttribute('aria-label','Interactive globe');
+      surface.setAttribute('aria-keyshortcuts','ArrowLeft ArrowRight Space');
+      setPaused(paused);
     }
     if(!paused||Math.abs(targetSpin-spin)>.0005||Math.abs(yawTarget-baseYaw)>.001||Math.abs(velocity)>.0001)schedule();
   }
@@ -158,11 +161,16 @@ async function activateGlobe(){
   window.addEventListener('scroll',updateScroll,{passive:true});
   surface.addEventListener('pointerdown',event=>{
     if(!event.isPrimary||event.button!==0)return;
-    activePointer=event.pointerId;lastX=event.clientX;velocity=0;
+    activePointer=event.pointerId;lastX=pointerStartX=event.clientX;
+    pointerStartY=event.clientY;dragged=false;velocity=0;
     surface.setPointerCapture(activePointer);mount.classList.add('dragging');
   });
   surface.addEventListener('pointermove',event=>{
     if(event.pointerId!==activePointer)return;
+    if(!dragged){
+      dragged=Math.hypot(event.clientX-pointerStartX,event.clientY-pointerStartY)>5;
+      if(!dragged)return;
+    }
     const step=(event.clientX-lastX)*.014;
     targetSpin+=step;velocity=Math.max(-.075,Math.min(.075,step*.2));
     lastX=event.clientX;dirty=true;schedule();
@@ -171,24 +179,32 @@ async function activateGlobe(){
     activePointer=null;mount.classList.remove('dragging');dirty=true;schedule();
   }
   surface.addEventListener('lostpointercapture',release);
-  surface.addEventListener('pointerup',event=>{if(event.pointerId===activePointer)release()});
+  surface.addEventListener('pointerup',event=>{
+    if(event.pointerId!==activePointer)return;
+    if(!dragged)setPaused(!paused);
+    release();
+  });
   surface.addEventListener('pointercancel',release);
-  controls.querySelectorAll('[data-turn]').forEach(button=>button.addEventListener('click',()=>{
-    targetSpin+=Number(button.dataset.turn)*Math.PI/3;velocity=0;dirty=true;schedule();
-  }));
-  pause.addEventListener('click',()=>{paused=!paused;refreshControl();previous=0;dirty=true;schedule()});
-  motionQuery.addEventListener('change',()=>{paused=motionQuery.matches;refreshControl();previous=0;dirty=true;schedule()});
+  surface.addEventListener('keydown',event=>{
+    if(event.key==='ArrowLeft'||event.key==='ArrowRight'){
+      event.preventDefault();
+      targetSpin+=(event.key==='ArrowLeft'?-1:1)*Math.PI/3;velocity=0;dirty=true;schedule();
+    }else if(event.key===' '){
+      event.preventDefault();
+      if(!event.repeat)setPaused(!paused);
+    }
+  });
+  motionQuery.addEventListener('change',()=>setPaused(motionQuery.matches));
   if(view.mode==='webgl')view.canvas.addEventListener('webglcontextlost',async event=>{
     event.preventDefault();visible=false;ready=false;
     if(request)cancelAnimationFrame(request);request=0;
-    mount.removeAttribute('data-renderer');controls.hidden=true;view.canvas.hidden=true;
+    mount.removeAttribute('data-renderer');surface.removeAttribute('tabindex');view.canvas.hidden=true;
     try{
       view=await createTurntableView();visible=true;previous=0;dirty=true;resize();
     }catch{mount.dataset.renderer='poster'}
   },{once:true});
-  refreshControl();resize();updateScroll();
+  resize();updateScroll();
 }
 activateGlobe().catch(()=>{
   if(mount)mount.dataset.renderer='poster';
-  if(controls)controls.hidden=true;
 });

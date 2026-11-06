@@ -28,12 +28,12 @@
     clearTimeout(advanceTimer);
     opening.classList.add('is-turning');
     if (motion.matches) finish();
-    else exitTimer = setTimeout(finish, 460);
+    else exitTimer = setTimeout(finish, 950);
   }
 
   opening.showModal();
   document.documentElement.classList.add('opening-active');
-  advanceTimer = setTimeout(enterSite, motion.matches ? 850 : 2050);
+  advanceTimer = setTimeout(enterSite, motion.matches ? 850 : 2300);
   enter.addEventListener('click', enterSite);
   let start = null;
   enter.addEventListener('pointerdown', event => {

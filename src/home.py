@@ -7,20 +7,15 @@ def home_enquiry():
 
 def homepage():
  opening_script=(ROOT/'src/opening.js').read_text()
- opening=f'''<dialog id="opening" aria-labelledby="opening-name">
- <div class="opening-atlas" aria-hidden="true"></div>
- <div class="opening-head"><span class="opening-monogram" aria-hidden="true">{MARK}</span><button class="skip-opening" type="button">Skip intro {icon('arr')}</button></div>
- <div class="opening-console"><div id="opening-name" class="opening-name"><strong>Cloud Haven</strong><span>Consultants</span></div></div>
- <div class="opening-foot"><button type="button" class="ignition" aria-label="Enter website"><span class="dial-face" aria-hidden="true"><span class="dial-knob"><i></i></span></span><span>Enter website {icon('arr')}</span></button></div>
- <div class="opening-progress" aria-hidden="true"></div></dialog><script>{opening_script}</script>'''
+ opening=f'''<dialog id="opening" aria-label="Cloud Haven opening animation"><div class="opening-head">{brand()}<button type="button" class="skip-opening">Skip intro {icon('arr')}</button></div><div class="opening-console"><div class="opening-label">Independent consultancy</div><div class="nameplate" aria-label="Cloud Haven"><span aria-hidden="true">CLOUD HAVEN</span></div><button class="ignition" type="button" aria-label="Turn the dial to enter"><span class="dial-states" aria-hidden="true"><i>Off</i><i>On</i></span><span class="dial-face" aria-hidden="true"><span class="dial-knob"><i></i></span></span><span class="dial-caption">Turn to enter</span></button></div></dialog><script>{opening_script}</script>'''
  hero=f'''
  <section class="film-hero" aria-labelledby="intro-title"><div class="film-set" aria-hidden="true"><div class="studio-wall"></div><div class="studio-light"></div><div class="studio-floor"></div></div>
  <div class="film-stage container"><div class="film-copy">{eyebrow('Independent consultancy')}
  <h1 id="intro-title" tabindex="-1"><span><strong>A clearer</strong></span> <span><em>perspective.</em></span></h1>
  <p>Business strategy and digital marketing for teams in Pakistan. Billing and revenue cycle support for medical practices in the United States.</p>
  <div class="intro-actions">{btn('Find your service','#service-finder','pill','arr')}{btn('Book a consultation','#consultation','text-link','ne')}</div></div>
- <div class="instrument" id="instrument" role="group" aria-label="Interactive three-dimensional globe"><div class="model-shadow"></div><img id="globe-poster" src="/assets/meridian-poster.webp" alt="Green and silver atlas globe on a machined metal stand" width="680" height="760" fetchpriority="high"><div id="globe-surface" role="img" aria-label="Globe. Drag horizontally to rotate, or use the rotation buttons."></div></div>
- <div class="film-edge"><a href="#practices" class="film-scroll">{icon('down')} Our practices</a><div class="object-controls" hidden><span class="drag-label">Rotate globe</span><button type="button" data-turn="-1" aria-label="Rotate globe left">{icon('back')}</button><button type="button" data-turn="1" aria-label="Rotate globe right">{icon('arr')}</button><button type="button" class="motion-toggle" aria-label="Pause globe rotation" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 14 14"><path class="pause-shape" d="M4 2v10M10 2v10"/><path class="play-shape" d="m4 2 7 5-7 5z"/></svg></button></div></div></div></section>'''
+ <div class="instrument" id="instrument" role="group" aria-label="Interactive three-dimensional globe"><div class="model-shadow"></div><img id="globe-poster" src="/assets/meridian-poster.webp" alt="Green and silver atlas globe on a machined metal stand" width="680" height="760" fetchpriority="high"><div id="globe-surface" role="img" aria-label="Green and silver globe."></div></div>
+ <div class="film-edge"><a href="#practices" class="film-scroll">{icon('down')} Our practices</a></div></div></section>'''
  deck_controls=[]
  chapters=[]
  for k,v in PRACTICES.items():
