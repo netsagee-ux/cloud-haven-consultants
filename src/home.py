@@ -1,4 +1,6 @@
 from common import *
+from brief import finder
+
 def home_enquiry():
  groups=['Business consultancy','Healthcare revenue','SEO & digital marketing']
  controls=''.join(f'<button type="button" aria-pressed="{str(i==0).lower()}" data-interest="{h(v)}">{label}</button>' for i,(v,label) in enumerate(zip(groups,['Business','Healthcare','Marketing'])))
@@ -12,7 +14,7 @@ def homepage():
  <div class="film-stage container"><div class="film-copy">
  <h1 id="intro-title" tabindex="-1"><span><strong>A clearer</strong></span> <span><em>perspective.</em></span></h1>
  <p>Strategy and marketing for Pakistani businesses. Medical billing for US practices.</p>
- <div class="intro-actions" id="service-finder">{btn('Find a service','/project-brief/','pill','arr')}{btn('Book a consultation','#consultation','text-link','ne')}</div></div>
+ <div class="intro-actions">{btn('Find a service','#service-finder','pill','arr')}{btn('Book a consultation','#consultation','text-link','ne')}</div></div>
  <div class="instrument" id="instrument" role="group" aria-label="Interactive three-dimensional globe"><div class="model-shadow"></div><img id="globe-poster" src="/assets/meridian-poster.webp" alt="Green and silver atlas globe on a machined metal stand" width="680" height="760" fetchpriority="high"><div id="globe-surface" role="img" aria-label="Green and silver globe."></div></div>
  <div class="film-edge"><a href="#practices" class="film-scroll">{icon('down')} Our practices</a></div></div></section>'''
  deck_controls=[]
@@ -21,12 +23,13 @@ def homepage():
   title={'digital':'Digital marketing','healthcare':'Healthcare revenue','business':'Business consultancy'}[k]
   deck_controls.append(f'<button type="button" data-chapter="{k}" aria-controls="chapter-{k}" aria-pressed="false">{title} {icon("arr")}</button>')
   chapters.append(f'''<article class="practice-entry" id="chapter-{k}" data-practice="{k}"><a class="chapter-photo" href="/services/#{k}" aria-label="View {h(title.lower())} services">{photo_image(k)}</a><div class="chapter-copy"><h3><a href="/services/#{k}">{title}</a></h3><p>{h(v['intro'])}</p>{btn('View services','/services/#'+k,'text-link','arr')}</div></article>''')
- practices=f'''<section class="studio-practices container" id="practices"><div class="practice-intro"><h2 class="display">Our <em>services.</em></h2><div class="practice-picker" aria-label="Select a practice" hidden>{''.join(deck_controls)}</div></div><div class="practice-chapters">{''.join(chapters)}<div class="deck-controls" hidden><span role="status" data-deck-status></span><div><button type="button" data-deck-move="-1" aria-label="Previous practice">{icon('back')}</button><button type="button" data-deck-move="1" aria-label="Next practice">{icon('arr')}</button></div></div></div></section>'''
+ practices=f'''<section class="studio-practices container" id="practices"><div class="practice-intro"><h2 class="display">Where we <em>help.</em></h2><div class="practice-picker" aria-label="Select a practice" hidden>{''.join(deck_controls)}</div></div><div class="practice-chapters">{''.join(chapters)}<div class="deck-controls" hidden><span role="status" data-deck-status></span><div><button type="button" data-deck-move="-1" aria-label="Previous practice">{icon('back')}</button><button type="button" data-deck-move="1" aria-label="Next practice">{icon('arr')}</button></div></div></div></section>'''
+ firm=f'''<section class="method-panel" aria-labelledby="firm-title"><div class="container method-grid"><div><h2 class="display" id="firm-title">A partner in<br><em>the work.</em></h2>{btn('About Cloud Haven','/about/','text-link')}</div>{method_tabs()}</div></section>'''
  guides=[
  ('Digital marketing','What goes into an SEO quote?','/blog/seo-cost-pakistan/'),
  ('Healthcare revenue','How does medical billing work?','/blog/what-is-medical-billing/'),
  ('Business consultancy','When should you bring in a consultant?','/blog/what-does-a-business-consultant-do/')]
  note_photos=['seo-audit-services','medical-billing-services-pakistan','business-consultancy-pakistan']
  stories=''.join(f'<article class="insight-card"><a href="{url}"><span class="insight-photo">{photo_image(key,sizes="(max-width: 700px) 100vw, 32vw")}</span><span class="art-kicker">{h(practice)}</span><h3>{h(title)}</h3></a></article>' for (practice,title,url),key in zip(guides,note_photos))
- notes=f'''<section class="journal container"><div class="section-heading"><h2 class="display">Selected <em>insights.</em></h2>{btn('All insights','/blog/','text-link')}</div><div class="insight-grid">{stories}</div></section>'''
- doc('/','Cloud Haven Consultants | Digital Marketing, Healthcare Revenue & Business Strategy','Independent consulting from Multan for businesses in Pakistan and US medical practices. Explore SEO, digital marketing, healthcare revenue and business strategy.',hero+practices+notes+home_enquiry(),home=True,opening=opening)
+ notes=f'''<section class="journal container"><div class="section-heading"><h2 class="display">From the <em>journal.</em></h2>{btn('All insights','/blog/','text-link')}</div><div class="insight-grid">{stories}</div></section>'''
+ doc('/','Cloud Haven Consultants | Digital Marketing, Healthcare Revenue & Business Strategy','Independent consulting from Multan for businesses in Pakistan and US medical practices. Explore SEO, digital marketing, healthcare revenue and business strategy.',hero+practices+firm+finder(on_home=True)+notes+home_enquiry(),home=True,opening=opening)

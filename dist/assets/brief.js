@@ -70,6 +70,7 @@
     if (event.key === key || event.key === null) { saved=readSaved(); sync(); }
   });
   if (!finder) return;
+  const compact = finder.dataset.finder === 'compact';
   const input = finder.querySelector('#finder-query');
   const results = finder.querySelector('.finder-results');
   const status = finder.querySelector('.finder-status');
@@ -94,13 +95,26 @@
     const matches = tokens.length > 1 ? ranked.filter(entry => entry.rank >= strongest * 0.6) : ranked;
     matches.sort((a,b) => sort.value==='az' ? a.item.title.localeCompare(b.item.title) : b.rank-a.rank);
     const count = matches.length;
-    const visible = expanded ? matches : matches.slice(0,3);
+    const waiting = compact && !input.value.trim() && group === 'all' && !expanded;
+    const limit = compact ? 2 : 3;
+    sort.closest('label').hidden = waiting;
+    if (waiting) {
+      status.textContent = '';
+      results.replaceChildren();
+      more.hidden = false;
+      more.textContent = 'Browse all ' + count + ' services ↓';
+      more.setAttribute('aria-expanded', 'false');
+      return;
+    }
+    const visible = expanded ? matches : matches.slice(0,limit);
     status.textContent = count ? (count===1?'1 matching service':count+' matching services') : 'No matching services. Try a different word or choose another practice.';
     results.replaceChildren(...visible.map(({item}) => {
       const row = make('li','match-row'), text = make('div','match-copy');
       const heading = make('h3');
       heading.append(serviceLink(item));
-      text.append(make('small','match-group',item.group),heading,make('p','',item.description));
+      if (!compact) text.append(make('small','match-group',item.group));
+      text.append(heading);
+      if (!compact) text.append(make('p','',item.description));
       const button = make('button','match-save');
       button.type = 'button'; button.dataset.resultSave = item.id;
       updateSaveButton(button,item.id);
@@ -112,12 +126,16 @@
       const link=make('a','text-link','Ask the team about your project ↗');
       link.href='/contact/'; const row=make('li'); row.append(link); results.append(row);
     }
-    more.hidden=count<=3;
+    more.hidden=count<=limit;
     more.textContent=expanded?'Show fewer services ↑':'Show all '+count+' services ↓';
     more.setAttribute('aria-expanded',String(expanded));
   }
   function resetResults(){ expanded=false;render(); }
-  finder.querySelector('form').addEventListener('submit',event => {event.preventDefault();resetResults();});
+  finder.querySelector('form').addEventListener('submit',event => {
+    event.preventDefault();
+    expanded = compact && !input.value.trim() && group === 'all';
+    render();
+  });
   input.addEventListener('input',resetResults);
   sort.addEventListener('change',render);
   function selectGroup(name){

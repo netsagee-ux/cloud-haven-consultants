@@ -74,12 +74,7 @@ def company():
  rec=PAGES['/about/']
  body=subhero('The firm','Independent advice. Shared direction.',rec['summary'],'editorial/firm',btn('Work with us','/contact/'),photo_alt='Colleagues reviewing work together around a table')
  body+=f'''<section class="leadership container" id="leadership"><figure class="founder-photo">{photo_image('editorial-menu')}</figure><div>{eyebrow('Leadership')}<h2 class="display">Umar M.</h2><p class="founder-role">Founder &amp; CEO</p><p>Umar leads the consulting team in Multan, Pakistan.</p>{btn('Explore the services','/services/','text-link','arr')}</div></section>'''
- steps=[('Discover','Understand the problem.','We discuss your priorities, constraints and measures of success.'),
-        ('Plan','Agree the scope.','Your written proposal sets out the work, timeline and price.'),
-        ('Deliver','Review progress.','One account lead tracks delivery and agrees the next steps with you.')]
- tabs=''.join(f'<button type="button" id="step-{i}" data-step="{i}" aria-controls="method-{i}">{h(label)}</button>' for i,(label,_,_) in enumerate(steps))
- panels=''.join(f'<div id="method-{i}" class="framework-panel" aria-labelledby="step-{i}"><h3>{h(title)}</h3><p>{h(detail)}</p></div>' for i,(_,title,detail) in enumerate(steps))
- body+=sect('How we work.',f'<div class="framework about-method"><div class="framework-steps" aria-label="How we work">{tabs}</div>{panels}</div>')
+ body+=sect('How we work.',method_tabs())
  body+=sect('Working with us.',rows([('Careers','/careers/','Explore the disciplines we recruit for and introduce yourself.'),('Case studies','/case-studies/','See how client evidence is measured and shared.'),('Pricing','/pricing/','Learn how we scope work and prepare a quote.')]))
  doc('/about/','About Cloud Haven',rec['summary'],body+end_cta())
  rec=PAGES['/careers/']
